@@ -20,7 +20,8 @@ const StyledImg = styled.img`
 	border-radius: 100%;
 `;
 const StyledState = styled.p`
-	color: green;
+	color: ${({ $active }) => ($active ? 'green' : 'red')};
+	margin-left: auto;
 `;
 
 export { StyledUser, StyledImg, StyledState };

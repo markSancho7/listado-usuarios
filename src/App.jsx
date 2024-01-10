@@ -6,11 +6,11 @@ import { useState } from 'react';
 const App = () => {
 	const [onlyActive, setOnlyActive] = useState(false);
 	const [search, setSearch] = useState('');
-	const [select, setSelect] = useState(0);
+	const [select, setSelect] = useState('0');
 
 	let filteredUsers = filterActiveUsers(USERS, onlyActive);
 	filteredUsers = filterByName(filteredUsers, search);
-	// filteredUsers = filterBySelect(filteredUsers, select);
+	filteredUsers = filterBySelect(filteredUsers, select);
 
 	return (
 		<>
@@ -25,7 +25,7 @@ const App = () => {
 						onChange={() => changeActive(onlyActive, setOnlyActive)}
 					></input>
 				</div>
-				<select onChange={() => changeSelect(event.target.value, setSelect)}>
+				<select onChange={(event) => changeSelect(event.target.value, setSelect)}>
 					<option value={0}>Por defecto</option>
 					<option value={1}>Por nombre</option>
 				</select>
@@ -63,19 +63,20 @@ const filterByName = (users, search) => {
 };
 
 // filtro por select
-const filterBySelect = (event, setSelect) => {
-	const value = event.target.value;
+
+const changeSelect = (value, setSelect) => {
 	setSelect(value);
 };
-const changeSelect = (users, select) => {
-	if (select === 0) {
+
+const filterBySelect = (users, select) => {
+	if (select === '0') {
 		return [...users];
 	}
 	return users.sort((a, b) => {
 		if (a.name > b.name) return 1;
 		if (a.name < b.name) return -1;
 		return 0;
-	});
+	})
 };
 
 // <div>
