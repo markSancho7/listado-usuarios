@@ -1,7 +1,8 @@
-import { v4 } from 'uuid';
+import { BrowserRouter } from 'react-router-dom';
 import User from './components/User/User';
 import { USERS } from './constants/USERS';
 import { useState } from 'react';
+import Router from './router/Router';
 
 const App = () => {
 	const [onlyActive, setOnlyActive] = useState(false);
@@ -25,16 +26,16 @@ const App = () => {
 						onChange={() => changeActive(onlyActive, setOnlyActive)}
 					></input>
 				</div>
-				<select onChange={(event) => changeSelect(event.target.value, setSelect)}>
+				<select onChange={event => changeSelect(event.target.value, setSelect)}>
 					<option value={0}>Por defecto</option>
 					<option value={1}>Por nombre</option>
 				</select>
 			</div>
-			<div>
-				{filteredUsers.map(user => {
-					return <User key={user.userId} {...user}></User>;
-				})}
-			</div>
+			<BrowserRouter>
+				{filteredUsers.map(user => (
+					<User key={user.userId} {...user}></User>
+				))}
+			</BrowserRouter>
 		</>
 	);
 };
@@ -76,12 +77,7 @@ const filterBySelect = (users, select) => {
 		if (a.name > b.name) return 1;
 		if (a.name < b.name) return -1;
 		return 0;
-	})
+	});
 };
 
-// <div>
-// 		{USERS.map(user => {
-// 		return <User key={v4()} {...user}></User>;
-// 		})}
-// 	</div>
 export default App;
