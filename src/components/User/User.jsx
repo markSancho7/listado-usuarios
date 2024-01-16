@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
 import { StyledImg, StyledState, StyledUser } from './styles';
 
-const User = ({ profileImage, name, email, active }) => {
+const User = ({ userId, profileImage, name, email, active }) => {
 	return (
 		<StyledUser>
 			<StyledImg src={profileImage} alt='' />
@@ -11,7 +12,7 @@ const User = ({ profileImage, name, email, active }) => {
 			<StyledState $active={active}>
 				{active ? 'active' : 'no active'}
 			</StyledState>
-			<button>detalles</button>
+			<Link to={`/${userId}`}>detalles</Link>
 		</StyledUser>
 	);
 };
