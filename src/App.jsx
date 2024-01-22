@@ -1,5 +1,4 @@
 import { BrowserRouter } from 'react-router-dom';
-import ListUsers from './components/listUsers/ListUsers';
 import Router from './router/Router';
 
 const App = () => {
